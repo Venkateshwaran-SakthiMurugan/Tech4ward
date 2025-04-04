@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# Namma Vivasayi
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack web platform connecting farmers from 6 villages directly to consumers. The platform collects crop production data from farmers, maintains a central inventory, and allows city users to view and order available produce.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Admin Panel**: Manage villages, farmers, inventory, and orders
+- **Farmer Dashboard**: Add produce and view history
+- **Customer Portal**: Browse available produce and place orders
+- **Authentication**: Role-based access control
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Backend**: Node.js with Express
+- **Frontend**: React.js with Vite
+- **Database**: MongoDB Atlas
+- **Styling**: Tailwind CSS
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installation
 
-### `npm test`
+1. Clone the repository
+2. Install dependencies:
+   ```
+   npm install
+   cd frontend
+   npm install
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Create a `.env` file in the root directory with the following variables:
+   ```
+   NODE_ENV=development
+   PORT=5000
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   ```
 
-### `npm run build`
+## Running the Application
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Development Mode
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To run both the backend and frontend concurrently:
+```
+npm run dev
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To run the backend only:
+```
+npm run server
+```
 
-### `npm run eject`
+To run the frontend only:
+```
+cd frontend
+npm run dev
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Production Mode
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Build the frontend:
+   ```
+   cd frontend
+   npm run build
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Start the server:
+   ```
+   npm start
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Initial Setup
 
-## Learn More
+1. Initialize the database with an admin user and villages:
+   ```
+   npm run init-db
+   ```
+   This will create:
+   - Admin user (email: admin@nammavivasayi.com, password: admin123)
+   - Six villages: Madurai, Coimbatore, Tirunelveli, Salem, Erode, Thanjavur
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. Log in as admin and add farmers for each village
+3. Register farmer users
+4. Register customer users
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Structure
 
-### Code Splitting
+- `/backend`: Server-side code
+  - `/config`: Database configuration
+  - `/controllers`: API controllers
+  - `/middleware`: Express middleware
+  - `/models`: Mongoose models
+  - `/routes`: API routes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- `/frontend`: Client-side code
+  - `/src`: Source files
+    - `/components`: Reusable UI components
+    - `/features`: Redux slices and services
+    - `/pages`: Application pages
 
-### Analyzing the Bundle Size
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT

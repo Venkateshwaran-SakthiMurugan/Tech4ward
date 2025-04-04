@@ -1,39 +1,49 @@
 {
-  "name": "namma-vivasayi-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
-  },
+  "name": "namma-vivasayi",
+  "version": "1.0.0",
+  "description": "A full-stack web platform connecting farmers directly to consumers",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "check-server": "node backend/scripts/checkServer.js",
+    "safe-dev": "npm run check-server && concurrently \"npm run server\" \"npm run client\"",
+    "install-client": "cd frontend && npm install",
+    "build-client": "cd frontend && npm run build",
+    "heroku-postbuild": "npm run install-client && npm run build-client",
+    "create-admin": "node backend/scripts/createAdmin.js",
+    "create-villages": "node backend/scripts/createVillages.js",
+    "init-db": "node backend/scripts/createAdmin.js && node backend/scripts/createVillages.js",
+    "check-users": "node backend/scripts/checkUsers.js",
+    "check-db": "node backend/scripts/checkDatabase.js",
+    "seed-data": "node backend/scripts/seedData.js",
+    "clear-data": "node backend/scripts/clearData.js",
+    "verify-user": "node backend/scripts/verifyRegistration.js"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "keywords": [
+    "farm",
+    "supply-chain",
+    "mongodb",
+    "express",
+    "react",
+    "node"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "concurrently": "^8.0.1",
+    "nodemon": "^2.0.22"
   }
 }
