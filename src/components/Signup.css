@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    background-color: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #262626;
+    padding: 20px;
+}
+
+.signup-box {
+    background-color: white;
+    border: 1px solid #dbdbdb;
+    border-radius: 1px;
+    padding: 20px 40px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+}
+
+.logo {
+    width: 175px;
+    margin: 20px 0;
+    border-radius: 50%;
+}
+
+h1 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #8e8e8e;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: #262626;
+    font-weight: 500;
+}
+
+input, select {
+    background: #fafafa;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    padding: 9px 8px 7px;
+    width: 100%;
+    font-size: 12px;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border: 1px solid #a8a8a8;
+}
+
+.otp-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.otp-container input {
+    flex: 1;
+}
+
+.otp-container button {
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.otp-verify-container {
+    display: none;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.otp-verify-container.active {
+    display: flex;
+}
+
+.account-type {
+    display: flex;
+    gap: 15px;
+    margin: 10px 0;
+}
+
+.account-type label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.account-type input {
+    width: auto;
+}
+
+button[type="submit"] {
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 16px;
+    width: 100%;
+    font-weight: 600;
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    color: #8e8e8e;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.divider::before, .divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #dbdbdb;
+    margin: 0 10px;
+}
+
+.login-link {
+    font-size: 14px;
+    color: #262626;
+}
+
+a {
+    color: #0095f6;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.footer {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #8e8e8e;
+}
+
+.bank-details {
+    display: none;
+}
+
+.bank-details.required {
+    display: block;
+}
+
+.error-message {
+    color: #ed4956;
+    font-size: 11px;
+    margin-top: 2px;
+    display: none;
+}
+
+/* Language selector styles */
+.language-selector {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.language-btn {
+    background: none;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    color: #262626;
+    width: auto;
+}
+
+.language-options {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    width: 100px;
+    z-index: 10;
+}
+
+.language-options.show {
+    display: block;
+}
+
+.language-option {
+    padding: 8px 10px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 12px;
+}
+
+.language-option:hover {
+    background-color: #fafafa;
+}
