@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | Namma Vivasayi</title>
+    <link rel="icon" href="https://i.imghippo.com/files/IkC5387Jh.JPG" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #262626;
+            padding: 20px;
+        }
+        
+        .signup-box {
+            background-color: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 1px;
+            padding: 20px 40px;
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+        
+        .logo {
+            width: 175px;
+            margin: 20px 0;
+            border-radius: 50%;
+        }
+        
+        h1 {
+            font-size: 17px;
+            font-weight: 600;
+            color: #8e8e8e;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 5px;
+            color: #262626;
+            font-weight: 500;
+        }
+        
+        input, select {
+            background: #fafafa;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            padding: 9px 8px 7px;
+            width: 100%;
+            font-size: 12px;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border: 1px solid #a8a8a8;
+        }
+        
+        .otp-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        
+        .otp-container input {
+            flex: 1;
+        }
+        
+        .otp-container button {
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 0 10px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        
+        .otp-verify-container {
+            display: none;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        
+        .otp-verify-container.active {
+            display: flex;
+        }
+        
+        .account-type {
+            display: flex;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        
+        .account-type label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+        }
+        
+        .account-type input {
+            width: auto;
+        }
+        
+        button[type="submit"] {
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 7px 16px;
+            width: 100%;
+            font-weight: 600;
+            margin: 15px 0;
+            cursor: pointer;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            color: #8e8e8e;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .divider::before, .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #dbdbdb;
+            margin: 0 10px;
+        }
+        
+        .login-link {
+            font-size: 14px;
+            color: #262626;
+        }
+        
+        a {
+            color: #0095f6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #8e8e8e;
+        }
+        
+        .bank-details {
+            display: none;
+        }
+        
+        .bank-details.required {
+            display: block;
+        }
+        
+        .error-message {
+            color: #ed4956;
+            font-size: 11px;
+            margin-top: 2px;
+            display: none;
+        }
+        
+        /* Language selector styles */
+        .language-selector {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        
+        .language-btn {
+            background: none;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            color: #262626;
+            width: auto;
+        }
+        
+        .language-options {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 4px;
+            width: 100px;
+            z-index: 10;
+        }
+        
+        .language-options.show {
+            display: block;
+        }
+        
+        .language-option {
+            padding: 8px 10px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 12px;
+        }
+        
+        .language-option:hover {
+            background-color: #fafafa;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-box">
+        <div class="language-selector">
+            <button class="language-btn" id="languageBtn">English</button>
+            <div class="language-options" id="languageOptions">
+                <div class="language-option" data-lang="en">English</div>
+                <div class="language-option" data-lang="ta">தமிழ் (Tamil)</div>
+            </div>
+        </div>
+        
+        <img src="https://i.imghippo.com/files/IkC5387Jh.JPG" alt="Namma vivasayi Logo" class="logo">
+        <h1 id="welcomeText">Sign up to see agriculture products and services</h1>
+        
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="name" id="nameLabel">Full Name</label>
+                <input type="text" id="name" placeholder="Enter your full name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="mobile" id="mobileLabel">Mobile Number</label>
+                <input type="tel" id="mobile" placeholder="Enter 10-digit mobile number" required maxlength="10">
+                <div class="otp-container" id="otpSendContainer">
+                    <input type="text" id="otpInput" placeholder="Enter OTP" disabled>
+                    <button type="button" id="sendOtpBtn">Send OTP</button>
+                </div>
+                <div class="otp-verify-container" id="otpVerifyContainer">
+                    <input type="text" id="verifyOtpInput" placeholder="Enter OTP">
+                    <button type="button" id="verifyOtpBtn">Verify OTP</button>
+                </div>
+                <div class="error-message" id="otpError">Invalid OTP. Please try again.</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="password" id="passwordLabel">Password</label>
+                <input type="password" id="password" placeholder="Enter password (min 6 characters)" required minlength="6">
+            </div>
+            
+            <div class="form-group">
+                <label for="location" id="locationLabel">Location</label>
+                <input type="text" id="location" placeholder="Enter your village/city" required>
+            </div>
+            
+            <div class="form-group">
+                <label id="accountTypeLabel">Account Type</label>
+                <div class="account-type">
+                    <label>
+                        <input type="radio" name="accountType" value="buyer" checked>
+                        <span id="buyerLabel">Buyer</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="accountType" value="seller">
+                        <span id="sellerLabel">Seller</span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="form-group bank-details" id="bankDetailsSection">
+                <label for="bankName" id="bankNameLabel">Bank Name</label>
+                <input type="text" id="bankName" placeholder="Enter your bank name">
+                <div class="error-message" id="bankNameError">Bank name is required for sellers</div>
+                
+                <label for="ifsc" id="ifscLabel" style="margin-top: 10px;">IFSC Code</label>
+                <input type="text" id="ifsc" placeholder="Enter bank IFSC code">
+                <div class="error-message" id="ifscError">IFSC code is required for sellers</div>
+            </div>
+            
+            <button type="submit" id="submitBtn">Sign Up</button>
+            
+            <div class="divider" id="dividerText">OR</div>
+            
+            <p class="login-link" id="loginPrompt">Already have an account? <a href="login.html" id="loginLink">Log in</a></p>
+        </form>
+        
+        <div class="footer" id="footerText">
+            By signing up, you agree to our Terms, Data Policy and Cookies Policy.
+        </div>
+    </div>
+
+    <script>
+        // Language translations
+        const translations = {
+            en: {
+                welcome: "Sign up to see agriculture products and services",
+                name: "Full Name",
+                namePlaceholder: "Enter your full name",
+                mobile: "Mobile Number",
+                mobilePlaceholder: "Enter 10-digit mobile number",
+                password: "Password",
+                passwordPlaceholder: "Enter password (min 6 characters)",
+                location: "Location",
+                locationPlaceholder: "Enter your village/city",
+                accountType: "Account Type",
+                buyer: "Buyer",
+                seller: "Seller",
+                bankName: "Bank Name",
+                bankNamePlaceholder: "Enter your bank name",
+                ifsc: "IFSC Code",
+                ifscPlaceholder: "Enter bank IFSC code",
+                sendOtp: "Send OTP",
+                verifyOtp: "Verify OTP",
+                otpPlaceholder: "Enter OTP",
+                otpError: "Invalid OTP. Please try again.",
+                bankNameError: "Bank name is required for sellers",
+                ifscError: "IFSC code is required for sellers",
+                signUp: "Sign Up",
+                divider: "OR",
+                loginPrompt: "Already have an account?",
+                loginLink: "Log in",
+                footer: "By signing up, you agree to our Terms, Data Policy and Cookies Policy."
+            },
+            ta: {
+                welcome: "விவசாய பொருட்கள் மற்றும் சேவைகளைப் பார்க்க பதிவு செய்க",
+                name: "முழு பெயர்",
+                namePlaceholder: "உங்கள் முழு பெயரை உள்ளிடவும்",
+                mobile: "கைபேசி எண்",
+                mobilePlaceholder: "10 இலக்க கைபேசி எண்ணை உள்ளிடவும்",
+                password: "கடவுச்சொல்",
+                passwordPlaceholder: "கடவுச்சொல்லை உள்ளிடவும் (குறைந்தது 6 எழுத்துகள்)",
+                location: "இடம்",
+                locationPlaceholder: "உங்கள் கிராமம்/நகரத்தை உள்ளிடவும்",
+                accountType: "கணக்கு வகை",
+                buyer: "வாங்குபவர்",
+                seller: "விற்பனையாளர்",
+                bankName: "வங்கி பெயர்",
+                bankNamePlaceholder: "உங்கள் வங்கியின் பெயரை உள்ளிடவும்",
+                ifsc: "IFSC குறியீடு",
+                ifscPlaceholder: "வங்கி IFSC குறியீட்டை உள்ளிடவும்",
+                sendOtp: "OTP அனுப்பு",
+                verifyOtp: "OTP சரிபார்",
+                otpPlaceholder: "OTP உள்ளிடவும்",
+                otpError: "தவறான OTP. மீண்டும் முயற்சிக்கவும்.",
+                bankNameError: "விற்பனையாளர்களுக்கு வங்கி பெயர் தேவை",
+                ifscError: "விற்பனையாளர்களுக்கு IFSC குறியீடு தேவை",
+                signUp: "பதிவு செய்க",
+                divider: "அல்லது",
+                loginPrompt: "ஏற்கனவே கணக்கு உள்ளதா?",
+                loginLink: "உள்நுழைய",
+                footer: "பதிவுபெறுவதன் மூலம், எங்கள் விதிமுறைகள், தரவு கொள்கை மற்றும் குக்கீகள் கொள்கைக்கு நீங்கள் ஒப்புக்கொள்கிறீர்கள்."
+            }
+        };
+
+        // DOM elements
+        const languageBtn = document.getElementById('languageBtn');
+        const languageOptions = document.getElementById('languageOptions');
+        const welcomeText = document.getElementById('welcomeText');
+        const nameLabel = document.getElementById('nameLabel');
+        const nameInput = document.getElementById('name');
+        const mobileLabel = document.getElementById('mobileLabel');
+        const mobileInput = document.getElementById('mobile');
+        const passwordLabel = document.getElementById('passwordLabel');
+        const passwordInput = document.getElementById('password');
+        const locationLabel = document.getElementById('locationLabel');
+        const locationInput = document.getElementById('location');
+        const accountTypeLabel = document.getElementById('accountTypeLabel');
+        const buyerLabel = document.getElementById('buyerLabel');
+        const sellerLabel = document.getElementById('sellerLabel');
+        const bankNameLabel = document.getElementById('bankNameLabel');
+        const bankNameInput = document.getElementById('bankName');
+        const ifscLabel = document.getElementById('ifscLabel');
+        const ifscInput = document.getElementById('ifsc');
+        const sendOtpBtn = document.getElementById('sendOtpBtn');
+        const verifyOtpBtn = document.getElementById('verifyOtpBtn');
+        const verifyOtpInput = document.getElementById('verifyOtpInput');
+        const otpError = document.getElementById('otpError');
+        const otpInput = document.getElementById('otpInput');
+        const bankNameError = document.getElementById('bankNameError');
+        const ifscError = document.getElementById('ifscError');
+        const submitBtn = document.getElementById('submitBtn');
+        const dividerText = document.getElementById('dividerText');
+        const loginPrompt = document.getElementById('loginPrompt');
+        const loginLink = document.getElementById('loginLink');
+        const footerText = document.getElementById('footerText');
+
+        // Current language
+        let currentLang = 'en';
+
+        // Toggle language options
+        languageBtn.addEventListener('click', function() {
+            languageOptions.classList.toggle('show');
+        });
+
+        // Close language options when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.language-selector')) {
+                languageOptions.classList.remove('show');
+            }
+        });
+
+        // Change language
+        document.querySelectorAll('.language-option').forEach(option => {
+            option.addEventListener('click', function() {
+                currentLang = this.getAttribute('data-lang');
+                languageBtn.textContent = currentLang === 'en' ? 'English' : 'தமிழ்';
+                translatePage(currentLang);
+                languageOptions.classList.remove('show');
+            });
+        });
+
+        // Translate the page
+        function translatePage(lang) {
+            document.documentElement.lang = lang;
+            const t = translations[lang];
+            
+            welcomeText.textContent = t.welcome;
+            nameLabel.textContent = t.name;
+            nameInput.placeholder = t.namePlaceholder;
+            mobileLabel.textContent = t.mobile;
+            mobileInput.placeholder = t.mobilePlaceholder;
+            passwordLabel.textContent = t.password;
+            passwordInput.placeholder = t.passwordPlaceholder;
+            locationLabel.textContent = t.location;
+            locationInput.placeholder = t.locationPlaceholder;
+            accountTypeLabel.textContent = t.accountType;
+            buyerLabel.textContent = t.buyer;
+            sellerLabel.textContent = t.seller;
+            bankNameLabel.textContent = t.bankName;
+            bankNameInput.placeholder = t.bankNamePlaceholder;
+            ifscLabel.textContent = t.ifsc;
+            ifscInput.placeholder = t.ifscPlaceholder;
+            sendOtpBtn.textContent = t.sendOtp;
+            verifyOtpBtn.textContent = t.verifyOtp;
+            verifyOtpInput.placeholder = t.otpPlaceholder;
+            otpError.textContent = t.otpError;
+            bankNameError.textContent = t.bankNameError;
+            ifscError.textContent = t.ifscError;
+            submitBtn.textContent = t.signUp;
+            dividerText.textContent = t.divider;
+            loginPrompt.innerHTML = `${t.loginPrompt} <a href="login.html" id="loginLink">${t.loginLink}</a>`;
+            footerText.textContent = t.footer;
+        }
+
+        // Original form functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form elements
+            const form = document.getElementById('signupForm');
+            const accountTypeRadios = document.querySelectorAll('input[name="accountType"]');
+            const bankDetailsSection = document.getElementById('bankDetailsSection');
+            
+            // Auto-focus next field on Enter
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach((input, index) => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        }
+                    }
+                });
+            });
+            
+            // Handle account type change
+            accountTypeRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'seller') {
+                        bankDetailsSection.classList.add('required');
+                        bankNameInput.setAttribute('required', '');
+                        ifscInput.setAttribute('required', '');
+                    } else {
+                        bankDetailsSection.classList.remove('required');
+                        bankNameInput.removeAttribute('required');
+                        ifscInput.removeAttribute('required');
+                        bankNameError.style.display = 'none';
+                        ifscError.style.display = 'none';
+                    }
+                });
+            });
+            
+            // OTP handling
+            let generatedOtp = '';
+            
+            sendOtpBtn.addEventListener('click', function() {
+                const mobileNumber = mobileInput.value;
+                if (mobileNumber.length === 10 && /^\d+$/.test(mobileNumber)) {
+                    // Generate random 6-digit OTP (in a real app, this would be sent via SMS)
+                    generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+                    console.log('Generated OTP:', generatedOtp); // For testing only
+                    
+                    // Show verification UI
+                    otpSendContainer.style.display = 'none';
+                    otpVerifyContainer.classList.add('active');
+                    verifyOtpInput.focus();
+                    
+                    // Disable mobile number field
+                    mobileInput.disabled = true;
+                } else {
+                    alert(currentLang === 'en' ? 'Please enter a valid 10-digit mobile number' : 'சரியான 10 இலக்க கைபேசி எண்ணை உள்ளிடவும்');
+                }
+            });
+            
+            verifyOtpBtn.addEventListener('click', function() {
+                const enteredOtp = verifyOtpInput.value;
+                if (enteredOtp === generatedOtp) {
+                    // OTP verified
+                    otpVerifyContainer.style.display = 'none';
+                    otpError.style.display = 'none';
+                    otpInput.value = currentLang === 'en' ? 'Verified' : 'சரிபார்க்கப்பட்டது';
+                    otpInput.disabled = true;
+                } else {
+                    // Invalid OTP
+                    otpError.style.display = 'block';
+                }
+            });
+            
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate seller bank details if account type is seller
+                const isSeller = document.querySelector('input[name="accountType"]:checked').value === 'seller';
+                let isValid = true;
+                
+                if (isSeller) {
+                    if (!bankNameInput.value.trim()) {
+                        bankNameError.style.display = 'block';
+                        isValid = false;
+                    } else {
+                        bankNameError.style.display = 'none';
+                    }
+                    
+                    if (!ifscInput.value.trim()) {
+                        ifscError.style.display = 'block';
+                        isValid = false;
+                    } else {
+                        ifscError.style.display = 'none';
+                    }
+                }
+                
+                // Check if OTP is verified
+                const verifiedText = currentLang === 'en' ? 'Verified' : 'சரிபார்க்கப்பட்டது';
+                if (otpInput.value !== verifiedText) {
+                    alert(currentLang === 'en' ? 'Please verify your mobile number with OTP first' : 'முதலில் உங்கள் கைபேசி எண்ணை OTP மூலம் சரிபார்க்கவும்');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // Form is valid, proceed with submission
+                    alert(currentLang === 'en' ? 'Form submitted successfully!' : 'படிவம் வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!');
+                    // In a real app, you would send the data to your server here
+                    // form.submit();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
